@@ -1,0 +1,7 @@
+{
+  "name": "call-of-kookmin",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
