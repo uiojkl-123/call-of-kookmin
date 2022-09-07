@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'ChusaLove';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2205@1.0/ChusaLove.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.5/dist/web/variable/pretendardvariable.css");
+
+.header-md::after {
+    background-image: none;
+    background: none;
+}
+
+ion-toolbar h1 {
+    font-size: 32px;
+    margin-left: 24px;
+    color: var(--c-gray-500);
+    font-family: 'ChusaLove';
+    font-weight: 500 !important;
+}
+
+ion-card {
+    margin-top: 0px;
+}
+
+ion-header{
+    z-index: 0;
+}
+
+h1{
+    font-family: 'Pretendard Variable';
+    font-weight: 650;
+    color: var(--ion-text-color);
+}
