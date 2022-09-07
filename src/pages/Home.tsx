@@ -16,10 +16,10 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonCard className='ion-padding' mode='ios'>
-          <h1>안녕</h1>
+          <h1>게시글1</h1>
         </IonCard>
         <IonCard className='ion-padding' mode='ios'>
-          <h1>안녕</h1>
+          <h1>게시글2</h1>
         </IonCard>
         <IonButton>안녕</IonButton>
         <IonItem>
