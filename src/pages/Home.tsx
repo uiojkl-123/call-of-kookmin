@@ -1,8 +1,7 @@
-import { IonCard, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Tab1.css';
+import { IonButton, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import './Home.css';
 
-const Tab1: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -22,9 +21,14 @@ const Tab1: React.FC = () => {
         <IonCard className='ion-padding' mode='ios'>
           <h1>안녕</h1>
         </IonCard>
+        <IonButton>안녕</IonButton>
+        <IonItem>
+          <IonLabel position='floating'>오예</IonLabel>
+          <IonInput clearInput></IonInput>
+        </IonItem>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Home;
