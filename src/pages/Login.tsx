@@ -2,6 +2,7 @@ import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonPage } from '@io
 import React from 'react'
 
 export const Login: React.FC = () => {
+
     return (
         <IonPage>
             <IonContent>

@@ -33,9 +33,11 @@ import './theme/variables.css';
 
 import './App.scss'
 import { Login } from './pages/Login';
+import { FeedPage } from './pages/FeedPage';
 
 setupIonicReact();
 
+const isLogin: boolean = true;
 
 const App: React.FC = () => (
   <IonApp>
@@ -43,9 +45,10 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route exact path="/main" component={Home} />
           <Route exact path="/">
-            <Redirect to="/main" />
+            <Redirect to={isLogin ? "/main" : "login"} />
           </Route>
           <Route exact path="/login" component={Login} />
+          <Route exact path="/feedPage" component={FeedPage} />
         </IonRouterOutlet>
     </IonReactRouter>
   </IonApp >
