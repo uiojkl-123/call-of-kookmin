@@ -1,8 +1,9 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
   IonLabel,
+  IonLoading,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -32,13 +33,22 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 import './App.scss'
+<<<<<<< HEAD
 import { Login } from './pages/Login';
 import { FeedPage } from './pages/FeedPage';
+=======
+import { getDoc, doc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useRef, useState } from 'react';
+import { auth, db } from './serviece/firebase';
+import { useStore } from './store/store';
+>>>>>>> 641d3d71fc56131241adb9776d11ffdd32c1283a
 
 setupIonicReact();
 
 const isLogin: boolean = true;
 
+<<<<<<< HEAD
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -53,5 +63,60 @@ const App: React.FC = () => (
     </IonReactRouter>
   </IonApp >
 );
+=======
+const App: React.FC = () => {
+
+  const [loading, setLoading] = useState<boolean>(true)
+
+  const { setCurrentUser } = useStore();
+
+  const mountRef = useRef<boolean>(true)
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userSnapshot = await getDoc(doc(db, 'user', user.uid))
+        if (!userSnapshot.exists()) {
+          setLoading(false)
+          return
+        }
+        if (!userSnapshot) { return }
+        const userData = userSnapshot?.data()
+
+        if (mountRef.current) {
+          setCurrentUser({ userId: user.uid, ...userData })
+          setLoading(false)
+        }
+      } else {
+        setLoading(false)
+      }
+    });
+
+    return () => {
+      mountRef.current = false
+    }
+  }, [])
+
+  return (
+    <IonApp>
+      <IonReactRouter>
+        {loading ? (
+          <IonLoading
+            isOpen={true}
+            message={'기다려 주세요...'}
+          />
+        ) : (
+          <IonRouterOutlet>
+            <Route exact path="/main" component={Home} />
+            <Route exact path="/">
+              <Redirect to="/main" />
+            </Route>
+          </IonRouterOutlet>
+        )}
+      </IonReactRouter>
+    </IonApp >
+  )
+}
+>>>>>>> 641d3d71fc56131241adb9776d11ffdd32c1283a
 
 export default App;
