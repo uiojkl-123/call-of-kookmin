@@ -31,39 +31,18 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-
 import './App.scss'
-<<<<<<< HEAD
-import { Login } from './pages/Login';
-import { FeedPage } from './pages/FeedPage';
-=======
 import { getDoc, doc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
->>>>>>> 641d3d71fc56131241adb9776d11ffdd32c1283a
+
 
 setupIonicReact();
 
 const isLogin: boolean = true;
 
-<<<<<<< HEAD
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-        <IonRouterOutlet>
-          <Route exact path="/main" component={Home} />
-          <Route exact path="/">
-            <Redirect to={isLogin ? "/main" : "login"} />
-          </Route>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/feedPage" component={FeedPage} />
-        </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp >
-);
-=======
 const App: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true)
@@ -109,7 +88,7 @@ const App: React.FC = () => {
           <IonRouterOutlet>
             <Route exact path="/main" component={Home} />
             <Route exact path="/">
-              <Redirect to="/main" />
+              <Redirect to={isLogin ? "/main" : "login"} />
             </Route>
           </IonRouterOutlet>
         )}
@@ -117,6 +96,5 @@ const App: React.FC = () => {
     </IonApp >
   )
 }
->>>>>>> 641d3d71fc56131241adb9776d11ffdd32c1283a
 
 export default App;
