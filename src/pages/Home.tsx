@@ -1,13 +1,19 @@
 import { IonButton, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useStore } from '../store/store';
 import './Home.css';
 
 const Home: React.FC = () => {
+
+
+  const { currentUser } = useStore()
+
   return (
     <IonPage>
       <IonContent fullscreen>
         <IonHeader>
           <IonToolbar>
             <h1>국민의 부름</h1>
+            <h1>{currentUser}</h1>
           </IonToolbar>
         </IonHeader>
         <IonHeader collapse="condense">

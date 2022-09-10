@@ -1,9 +1,9 @@
 import create from 'zustand';
 import { devtools } from 'zustand/middleware'
 
-interface CurrentUser  {
-    userId: string,
-    subscription?: string[]
+interface CurrentUser {
+    userId?: string,
+    userName?: string
 }
 
 interface StoreType {

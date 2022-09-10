@@ -38,6 +38,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
+import { Login } from './pages/Login';
 
 setupIonicReact();
 
@@ -86,6 +87,7 @@ const App: React.FC = () => {
         ) : (
           <IonRouterOutlet>
             <Route exact path="/main" component={Home} />
+            <Route exact path="/login" component={Login} />   
             <Route exact path="/">
               <Redirect to="/main" />
             </Route>
