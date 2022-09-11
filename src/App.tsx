@@ -13,6 +13,7 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
 import { Login } from './pages/Login';
+import { FeedPage } from './pages/FeedPage';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,9 +39,9 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
-import { FeedPage } from './pages/FeedPage';
+import { Call } from './pages/Call';
+import { Select } from './pages/Select';
 
-import { Login } from './pages/Login';
 
 setupIonicReact();
 
@@ -90,14 +91,15 @@ const App: React.FC = () => {
             message={'기다려 주세요...'}
           />
         ) : (
-          <IonRouterOutlet>
+          <IonRouterOutlet animated={false}>
             <Route exact path="/main" component={Home} />
-            <Route exact path="/login" component={Login} />
             <Route exact path="/">
               <Redirect to={isLogin ? "/main" : "/login"} />
             </Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/feedPage" component={FeedPage} />
+            <Route exact path="/call" component={Call} />
+            <Route exact path="/select/:kind" component={Select} />
           </IonRouterOutlet>
         )}
       </IonReactRouter>

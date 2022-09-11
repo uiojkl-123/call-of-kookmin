@@ -12,7 +12,7 @@
     background: none;
 }
 
-ion-toolbar h1 {
+h1 {
     font-size: 32px;
     margin-left: 24px;
     color: var(--c-gray-500);
@@ -28,11 +28,6 @@ ion-header{
     z-index: 0;
 }
 
-h1{
-    font-family: 'Pretendard Variable';
-    font-weight: 650;
-    color: var(--ion-text-color);
-}
 
 * {
     font-family: 'Pretendard Variable';
