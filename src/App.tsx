@@ -12,6 +12,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import Home from './pages/Home';
+import { Login } from './pages/Login';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -37,10 +38,12 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
+import { FeedPage } from './pages/FeedPage';
 
 
 setupIonicReact();
 
+// 22. 9. 8 isLogin 변수 추가
 const isLogin: boolean = true;
 
 const App: React.FC = () => {
@@ -88,8 +91,10 @@ const App: React.FC = () => {
           <IonRouterOutlet>
             <Route exact path="/main" component={Home} />
             <Route exact path="/">
-              <Redirect to={isLogin ? "/main" : "login"} />
+              <Redirect to={isLogin ? "/main" : "/login"} />
             </Route>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/feedPage" component={FeedPage} />
           </IonRouterOutlet>
         )}
       </IonReactRouter>
