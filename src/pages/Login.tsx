@@ -30,7 +30,6 @@ export const Login: React.FC = () => {
         }
     }
 
-
     return (
         <IonPage className='loginPage'>
             <IonContent fullscreen>
