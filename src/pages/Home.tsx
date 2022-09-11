@@ -13,7 +13,7 @@ const Home: React.FC = () => {
         <IonHeader>
           <IonToolbar>
             <h1>국민의 부름</h1>
-            <h1>{currentUser}</h1>
+            <h1>{currentUser?.userName}</h1>
           </IonToolbar>
         </IonHeader>
         <IonHeader collapse="condense">

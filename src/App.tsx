@@ -81,13 +81,14 @@ const App: React.FC = () => {
       <IonReactRouter>
         {loading ? (
           <IonLoading
+            mode='ios'
             isOpen={true}
             message={'기다려 주세요...'}
           />
         ) : (
           <IonRouterOutlet>
             <Route exact path="/main" component={Home} />
-            <Route exact path="/login" component={Login} />   
+            <Route exact path="/login" component={Login} />
             <Route exact path="/">
               <Redirect to="/main" />
             </Route>

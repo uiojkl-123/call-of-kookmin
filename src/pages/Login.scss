@@ -1,0 +1,72 @@
+.loginPage {
+
+    .container {
+        padding: 0px 16px;
+
+        .bibrate {
+            animation: bibrate 0.5s;
+        }
+
+        @keyframes bibrate {
+            0% {
+                transform: translateX(0rem);
+            }
+
+            20% {
+                transform: translateX(-1rem);
+            }
+
+            40% {
+                transform: translateX(1rem);
+            }
+
+            60% {
+                transform: translateX(-1rem);
+            }
+
+            80% {
+                transform: translateX(1rem);
+            }
+
+            100% {
+                transform: translateX(0rem);
+            }
+        }
+
+
+        .googleSign {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: white;
+            border: solid 1px #aeaeae;
+            border-radius: 8px;
+            height: 48px;
+            margin-bottom: 16px;
+            margin-top: 16px;
+            font-size: 16px;
+            transition: .1s;
+
+            img {
+                margin-right: 8px;
+                width: 24px;
+                height: 24px;
+            }
+
+            .span {
+                font-weight: 800;
+            }
+
+            &:hover {
+                background-color: #eeeeee;
+            }
+
+            &:active {
+                background-color: #787878;
+            }
+        }
+    }
+}

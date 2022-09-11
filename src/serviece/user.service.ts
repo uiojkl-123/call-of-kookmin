@@ -1,37 +1,41 @@
-import { sendSignInLinkToEmail } from "firebase/auth";
-import { auth } from "./firebase";
-
-export const signIn = async (email: string) => {
-    const actionCodeSettings = {
-        // URL you want to redirect back to. The domain (www.example.com) for this
-        // URL must be in the authorized domains list in the Firebase Console.
-        url: 'https://call-of-kookmin.web.app/' + '/login',
-        // This must be true.
-        handleCodeInApp: true,
-    };
-
-
-    await sendSignInLinkToEmail(auth, email, actionCodeSettings)
-        .then(() => {
-            // The link was successfully sent. Inform the user.
-            // Save the email locally so you don't need to ask the user for it again
-            // if they open the link on the same device.
-            window.localStorage.setItem('emailForSignIn', email);
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            throw errorCode
-            // ...
-        });
-}
+import { getRedirectResult, GoogleAuthProvider, sendSignInLinkToEmail, signInWithPopup, signInWithRedirect, UserCredential } from "firebase/auth";
+import { getDoc, doc, setDoc } from "firebase/firestore";
+import { auth, db } from "./firebase";
 
 export const signOut = async () => {
     await auth.signOut();
 }
 
+export const googleSignUpWithPopup = async (): Promise<void> => {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider)
+    await makeUser(result);
+    return
+}
 
-export const makeUser = async (email: string, phone: number, name:string, ) => {
+export const googleSignUpWithRedirect = async () => {
+    const provider = new GoogleAuthProvider();
+    await signInWithRedirect(auth, provider).catch(err => { throw new Error(err) });
+}
 
+export const handleGoogleRedirectResult = async () => {
+    const result = await getRedirectResult(auth)
+    await makeUser(result);
+    return
+}
+
+const makeUser = async (result: UserCredential | null) => {
+
+    if (!result) { return }
+    // The signed-in user info.
+    const user = result.user;
+
+    if (user.email?.split('@').at(-1) !== 'kookmin.ac.kr') { throw '국민대학교 이메일이 아닙니다.' }
+    if ((await getDoc(doc(db, 'user', user.uid))).exists()) { return }
+    await setDoc(doc(db, "user", user.uid), {
+        userEmail: user.email,
+        userName: user.displayName,
+        phone: user.phoneNumber
+    }, { merge: true }).catch((err) => console.log(err))
+    return
 }
