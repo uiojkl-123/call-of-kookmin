@@ -1,6 +1,7 @@
 import { IonButton, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { constants } from 'buffer';
 import { useHistory } from 'react-router';
+import { useStore } from '../store/store';
 import './Home.css';
 import { idList } from '../static/constants';
 
@@ -8,12 +9,15 @@ const Home: React.FC = () => {
 
   const history = useHistory();
 
+  const { currentUser } = useStore()
+
   return (
     <IonPage>
       <IonContent fullscreen>
         <IonHeader collapse='condense' style={{position:'fixed'}}>
           <IonToolbar style={{padding:'0'}}>
             <h1>국민의 부름</h1>
+            <h1>{currentUser?.userName}</h1>
           </IonToolbar>
         </IonHeader>
 
