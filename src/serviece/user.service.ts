@@ -1,10 +1,12 @@
 import { getRedirectResult, GoogleAuthProvider, sendSignInLinkToEmail, signInWithPopup, signInWithRedirect, UserCredential } from "firebase/auth";
 import { getDoc, doc, setDoc } from "firebase/firestore";
+import { useStore } from "../store/store";
 import { auth, db } from "./firebase";
 
 export const signOut = async () => {
     await auth.signOut();
 }
+
 
 export const googleSignUpWithPopup = async (): Promise<void> => {
     const provider = new GoogleAuthProvider();

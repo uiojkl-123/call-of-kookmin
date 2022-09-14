@@ -12,7 +12,7 @@ export const idList = [
 ]
 
 export const db: {title:string, content:string}[] = [
-    {title: '제목1', content:'내용1'},
+    {title: '볼펜 배달이요', content:'제트스트림으로'},
     {title: '제목2', content: '내용2'},
     {title: '제목3', content: '내용3'}
 ]
