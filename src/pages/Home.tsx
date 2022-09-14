@@ -2,7 +2,7 @@ import { IonButton, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel,
 import { constants } from 'buffer';
 import { useHistory } from 'react-router';
 import { useStore } from '../store/store';
-import './Home.sscss';
+import './Home.scss';
 import { idList } from '../static/constants';
 import { Link } from 'react-router-dom';
 
