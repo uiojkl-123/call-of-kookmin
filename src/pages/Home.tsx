@@ -2,7 +2,7 @@ import { IonButton, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel,
 import { constants } from 'buffer';
 import { useHistory } from 'react-router';
 import { useStore } from '../store/store';
-import './Home.css';
+import './Home.scss';
 import { idList } from '../static/constants';
 
 const Home: React.FC = () => {
@@ -12,30 +12,29 @@ const Home: React.FC = () => {
   const { currentUser } = useStore()
 
   return (
-    <IonPage>
+    <IonPage className='homePage'>
       <IonContent fullscreen>
-        <IonHeader collapse='condense' style={{position:'fixed'}}>
-          <IonToolbar style={{padding:'0'}}>
-            <h1>국민의 부름</h1>
-            <h1>{currentUser?.userName}</h1>
-          </IonToolbar>
-        </IonHeader>
+            <header>
+              <h1>국민의 부름</h1>
+              <h1>{currentUser?.userName}</h1>
+            </header>
+        <div style={{ marginTop: '20px' }}>
+          {idList.map((value, index) => {
+            return <IonCard className='ion-padding' mode='ios' onClick={() => history.push('feedPage?pageNum=' + value)}>
+              게시글{index}
+            </IonCard>
+          })}
+        </div>
 
-        {idList.map((value, index)=>{
-          return  <IonCard className='ion-padding' mode='ios' onClick={()=>history.push('feedPage?pageNum=' + value)}>
-          게시글{index}
-        </IonCard>
-        })}
-       
         <IonButton style={{
-          position:'fixed',
-          zIndex:'10', 
-          width:'calc(100% - 32px)',
-          bottom:'16px',  
-          fontSize:'20px',
-          padding:'0 8px 0 8px',
-          margin:'0 16px'
-          }}>
+          position: 'fixed',
+          zIndex: '10',
+          width: 'calc(100% - 32px)',
+          bottom: '16px',
+          fontSize: '20px',
+          padding: '0 8px 0 8px',
+          margin: '0 16px'
+        }}>
           부르기
         </IonButton>
       </IonContent>
