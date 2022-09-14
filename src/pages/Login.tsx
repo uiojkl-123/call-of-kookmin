@@ -1,7 +1,7 @@
 import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonLoading, IonPage, useIonAlert } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
-import { googleSignUpWithPopup, googleSignUpWithRedirect } from '../serviece/user.service'
+import { googleSignUpWithPopup, googleSignUpWithRedirect, handleGoogleRedirectResult } from '../serviece/user.service'
 import { isMobile } from 'react-device-detect'
 import './Login.scss'
 
@@ -29,6 +29,19 @@ export const Login: React.FC = () => {
             present({ mode: 'ios', header: '회원가입 실패', subHeader: '구글 계정 연동 실패', message: '구글 계정을 가져오는 데에서 문제가 발생했습니다.' + err })
         }
     }
+
+    useEffect(() => {
+        setLoading(true)
+            ; (async () => {
+                await handleGoogleRedirectResult().then(() => {
+                    setLoading(false)
+                    history.push('/main')
+                }).catch(err => {
+                    setLoading(false)
+                    present({ header: '로그인 실패', subHeader: '구글 계정 연동 실패', message: '구글 계정을 가져오는 데에서 문제가 발생했습니다.' + err })
+                })
+            })()
+    }, [])
 
     return (
         <IonPage className='loginPage'>
