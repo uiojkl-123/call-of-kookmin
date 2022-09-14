@@ -40,7 +40,6 @@ import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
 import { FeedPage } from './pages/FeedPage';
 
-import { Login } from './pages/Login';
 
 setupIonicReact();
 
@@ -92,7 +91,6 @@ const App: React.FC = () => {
         ) : (
           <IonRouterOutlet>
             <Route exact path="/main" component={Home} />
-            <Route exact path="/login" component={Login} />
             <Route exact path="/">
               <Redirect to={isLogin ? "/main" : "/login"} />
             </Route>
