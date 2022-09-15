@@ -98,7 +98,7 @@ const App: React.FC = () => {
               {/*----------고쳐야 해요---------------*/}
             </Route>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/feedPage" component={FeedPage} />
+            <Route exact path="/feedPage/:pageId" component={FeedPage} />
             <Route exact path="/call" component={Call} />
             <Route exact path="/select/:kind" component={Select} />
 
