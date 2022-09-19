@@ -1,5 +1,7 @@
-import { IonCard, IonCardContent, IonCardTitle, IonContent } from '@ionic/react'
+import { IonCard, IonCardContent, IonCardTitle, IonContent, IonIcon } from '@ionic/react'
+import { arrowBack } from 'ionicons/icons'
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 import { COKButton } from './COKButton'
 import './Convenience.scss'
 
@@ -31,14 +33,26 @@ export const Convenience = () => {
     }
   }
 
+  const history = useHistory();
+
   return (
     <IonContent className='convenientPage'>
+      <div className='toolbar'>
+        <IonIcon icon={arrowBack} className='icon' onClick={() => history.goBack()} />
+      </div>
       <div className='container'>
         {cafeMenu.map((value) => {
           return (
-            <IonCard onClick={() => handleClick(value.id)} className={shopList.includes(value.id) ? 'clicked' : 'unClicked'}>
-              <IonCardTitle>{value.name}</IonCardTitle>
-              <IonCardContent>가격: {value.price}</IonCardContent>
+            <IonCard onClick={() => handleClick(value.id)} className={shopList.includes(value.id) ? 'clicked card' : 'unClicked card'}>
+              <img className='img' src='../../assets/kookmin.png'></img>
+              <div className='rightBox'>
+                <div className='menuName'>{value.name}</div>
+                <div className='menuPrice'>가격: {value.price}</div>
+              </div>
+              <div>
+                <div>수량</div>
+                <div>- 0 +</div>
+              </div>
             </IonCard>
           )
         })}

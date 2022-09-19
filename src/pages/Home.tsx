@@ -18,14 +18,15 @@ const Home: React.FC = () => {
     <IonPage className='homePage'>
       <IonContent fullscreen>
         <header>
-          <h1>국민의 부름 {currentUser?.userName}</h1>
+          <h1>국민의 부름 </h1>
+          {/* {currentUser?.userName} */}
         </header>
 
-        {/* {컴포넌트로 만들어서 param으로 게시글 id를 줍시다} */}
-        <div style={{ marginTop: '70px' }}>
+        <div className='feedBox'>
           {db.map((value) => {
             return <IonCard className='ion-padding' mode='ios' onClick={() => history.push('feedPage/' + value.id)}>
-              게시글{value.id}
+              <span className='feedTitle'>{value.title}</span><br/>
+              <span className='feedInfo'>{value.time + ' | ' + value.writer}</span>
             </IonCard>
           })}
         </div>

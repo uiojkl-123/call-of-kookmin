@@ -1,4 +1,20 @@
 .callPage {
+    .toolbar{
+        padding: 12px 16px 4px;
+        z-index: 5000;
+        position:fixed;
+        width: 100%;
+        background-color: var(--ion-background-color);
+
+        .icon{
+            font-size:28px;
+        }
+    }
+
+    .textBox{
+        margin-top:30px;
+        text-align: center;
+    }
     
     ion-grid {
         display: grid;

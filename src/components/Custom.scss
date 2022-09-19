@@ -1,0 +1,18 @@
+.container{
+    .toolbar{
+        padding: 12px 16px;
+        z-index: 5000;
+        position:fixed;
+        width: 100%;
+        background-color: var(--ion-background-color);
+
+        .icon{
+            font-size:28px;
+        }
+    }
+
+    .content{
+        margin-top:60px;
+        padding: 0 16px;
+    }
+}

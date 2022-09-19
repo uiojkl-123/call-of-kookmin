@@ -17,13 +17,32 @@
         }
     }
 
+    .feedBox{
+        padding-top: 60px;
+        padding-bottom: 70px;
+        .ion-padding{
+            height: 70px;
+            margin: 16px;
+            padding: 16px;
+        }
+        .feedTitle{
+            font-size: 16px;
+        }
+        .feedInfo{
+            font-size: 12px;
+            color: var(--c-gray-600)
+        }
+    }
+
     .button {
-        margin:0 16px;
-        width: calc(100% - 32px);
-        bottom: 16px;
+        height:72px;
+        padding:16px 16px 16px;
+        width: 100%;
+        bottom: 0;
         position: fixed;
         display: flex;
         flex-direction: row;
         justify-content: center;
+        background-color: var(--ion-background-color);
     }
 }

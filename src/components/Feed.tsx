@@ -19,7 +19,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
     return (
         <IonContent fullscreen className='feedContainer'>
             <div className='toolbar'>
-                <IonIcon icon={arrowBack} size='large' onClick={() => history.push('/main')} />
+                <IonIcon icon={arrowBack} className='icon' onClick={() => history.push('/main')} />
             </div>
 
             <IonCard className='content'>
@@ -30,10 +30,10 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                     </div>
                     <div className='rightBox'>
                         <div className='writerInfoBox'>
-                            익명(과학관 2층)
+                            {db[index].writer}
                         </div>
                         <div className='timeBox'>
-                            5분 전
+                            {db[index].time}
                         </div>
                     </div>
                 </div>
