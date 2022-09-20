@@ -42,6 +42,7 @@ import { useStore } from './store/store';
 import { Call } from './pages/Call';
 import { Select } from './pages/Select';
 import { Temp } from './pages/Temp';
+import { Accepting } from './components/Accepting';
 
 
 setupIonicReact();
@@ -103,6 +104,7 @@ const App: React.FC = () => {
             <Route exact path="/select/:kind" component={Select} />
 
             <Route exact path="/temp" component={Temp} />
+            <Route exact path="/accepting" component={Accepting} />
           </IonRouterOutlet>
         )}
       </IonReactRouter>

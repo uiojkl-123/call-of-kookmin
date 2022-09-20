@@ -14,5 +14,23 @@
     .content{
         margin-top:60px;
         padding: 0 16px;
+        .precautions{
+            font-weight: 300;
+            color: var(--c-gray-600);
+            padding-bottom:16px;
+        }
+    }
+
+    
+    .button {
+        height:72px;
+        padding:16px 16px 16px;
+        width: 100%;
+        bottom: 0;
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: var(--ion-background-color);
     }
 }

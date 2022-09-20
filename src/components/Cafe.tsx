@@ -38,7 +38,7 @@ export const Cafe = () => {
           return (
             <IonCard onClick={() => handleClick(value.id)} className={shopList.includes(value.id) ? 'clicked card' : 'unClicked card'}>
               <img className='img' src='../../assets/kookmin.png'></img>
-              <div className='rightBox'>
+              <div className='middleBox'>
                 <div className='menuName'>{value.name}</div>
                 <div className='menuPrice'>가격: {value.price}</div>
               </div>

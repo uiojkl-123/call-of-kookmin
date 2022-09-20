@@ -7,6 +7,7 @@ interface COKButtonProps{
     text:string
     cancle?:boolean
     onClick:Function
+    id?:string
 }
 
 export const COKButton:React.FC<COKButtonProps> = (props) => {
@@ -14,6 +15,7 @@ export const COKButton:React.FC<COKButtonProps> = (props) => {
     return (
         <IonButton className={props.cancle ? 'COKCancleButton': 'COKButton'}
             onClick={()=>props.onClick()}
+            id={props.id}
         >
             {props.text}
         </IonButton>

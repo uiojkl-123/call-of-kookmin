@@ -1,4 +1,4 @@
-import { IonCard, IonCardContent, IonCardTitle, IonContent, IonIcon } from '@ionic/react'
+import { IonButton, IonCard, IonCardContent, IonCardTitle, IonContent, IonIcon } from '@ionic/react'
 import { arrowBack } from 'ionicons/icons'
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
@@ -35,6 +35,8 @@ export const Convenience = () => {
 
   const history = useHistory();
 
+  const [amount, setAmount] = useState<number>(0);
+
   return (
     <IonContent className='convenientPage'>
       <div className='toolbar'>
@@ -45,13 +47,9 @@ export const Convenience = () => {
           return (
             <IonCard onClick={() => handleClick(value.id)} className={shopList.includes(value.id) ? 'clicked card' : 'unClicked card'}>
               <img className='img' src='../../assets/kookmin.png'></img>
-              <div className='rightBox'>
+              <div className='middleBox'>
                 <div className='menuName'>{value.name}</div>
                 <div className='menuPrice'>가격: {value.price}</div>
-              </div>
-              <div>
-                <div>수량</div>
-                <div>- 0 +</div>
               </div>
             </IonCard>
           )
