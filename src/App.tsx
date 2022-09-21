@@ -11,7 +11,7 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
+import Accept from './pages/Accept';
 import { Login } from './pages/Login';
 import { FeedPage } from './pages/FeedPage';
 
@@ -40,7 +40,6 @@ import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
 import { Call } from './pages/Call';
-import { Select } from './pages/Select';
 import { Temp } from './pages/Temp';
 import { Accepting } from './components/Accepting';
 
@@ -83,6 +82,9 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
+      <header>
+        <h1>국민의 부름 </h1>
+      </header>
       <IonReactRouter>
         {loading ? (
           <IonLoading
@@ -91,19 +93,32 @@ const App: React.FC = () => {
             message={'기다려 주세요...'}
           />
         ) : (
-          <IonRouterOutlet animated={false}>
-            <Route exact path="/main" component={Home} />
-            <Route exact path="/">
-              <Redirect to={currentUser ? "/main" : "/login"} />
-            </Route>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/feedPage/:pageId" component={FeedPage} />
-            <Route exact path="/call" component={Call} />
-            <Route exact path="/select/:kind" component={Select} />
+          <IonTabs>
+            <IonTabBar slot="top">
+              <IonTabButton tab="tab1" href="/call">
+                <IonLabel>부르기</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="tab2" href="/accept">
+                <IonLabel>부름에 응답</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+            <IonRouterOutlet animated={false}>
 
-            <Route exact path="/temp" component={Temp} />
-            <Route exact path="/accepting" component={Accepting} />
-          </IonRouterOutlet>
+              <Route exact path="/">
+                <Redirect to={currentUser ? "/call" : "/login"} />
+              </Route>
+              <Route exact path="/login" component={Login} />
+
+
+              <Route exact path="/call" component={Call} />
+
+              <Route exact path="/accept" component={Accept} />
+              <Route exact path="/feedPage/:pageId" component={FeedPage} />
+
+              <Route exact path="/temp" component={Temp} />
+              <Route exact path="/accepting" component={Accepting} />
+            </IonRouterOutlet>
+          </IonTabs>
         )}
       </IonReactRouter>
     </IonApp >

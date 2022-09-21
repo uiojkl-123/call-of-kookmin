@@ -1,13 +1,12 @@
 import { IonButton, IonCard, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import { constants } from 'buffer';
 import { useHistory } from 'react-router';
 import { useStore } from '../store/store';
-import './Home.scss';
+import './Accept.scss';
 import { db } from '../static/constants';
 import { Link } from 'react-router-dom';
 import { COKButton } from '../components/COKButton';
 
-const Home: React.FC = () => {
+const Accept: React.FC = () => {
 
   const history = useHistory();
 
@@ -15,12 +14,8 @@ const Home: React.FC = () => {
 
 
   return (
-    <IonPage className='homePage'>
+    <IonPage className='acceptPage'>
       <IonContent fullscreen>
-        <header>
-          <h1>국민의 부름 </h1>
-          {/* {currentUser?.userName} */}
-        </header>
 
         <div className='feedBox'>
           {db.map((value) => {
@@ -41,4 +36,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Accept;
