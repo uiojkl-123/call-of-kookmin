@@ -57,6 +57,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
             <div className='button'>
                 <COKButton text={'요청 수락'} onClick={() => {
                     presentAlert({
+                        mode: 'ios',
                         header: '이용 약관',
                         message: policy,
                         cssClass: 'alert',
@@ -65,7 +66,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                 text: '수락',
                                 role: 'confirm',
                                 cssClass: 'confirmBtn',
-                                handler: () => {history.push('/accepting')},
+                                handler: () => { history.push('/accepting') },
                             },
                             {
                                 text: '취소',

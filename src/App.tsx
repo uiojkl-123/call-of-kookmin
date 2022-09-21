@@ -52,7 +52,7 @@ const App: React.FC = () => {
 
   const [loading, setLoading] = useState<boolean>(true)
 
-  const { setCurrentUser } = useStore();
+  const { currentUser, setCurrentUser } = useStore();
 
   const mountRef = useRef<boolean>(true)
 
@@ -94,9 +94,7 @@ const App: React.FC = () => {
           <IonRouterOutlet animated={false}>
             <Route exact path="/main" component={Home} />
             <Route exact path="/">
-              {/*----------고쳐야 해요---------------*/}
-              <Redirect to={false ? "/main" : "/login"} />
-              {/*----------고쳐야 해요---------------*/}
+              <Redirect to={currentUser ? "/main" : "/login"} />
             </Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/feedPage/:pageId" component={FeedPage} />
