@@ -22,8 +22,16 @@ export const googleSignUpWithRedirect = async () => {
 
 export const handleGoogleRedirectResult = async () => {
     if(!auth.currentUser?.uid){return}
+    console.log(auth.currentUser);
+    try{
     const result = await getRedirectResult(auth)
     await makeUser(result);
+    }catch(err:any){
+        console.error('조짐');
+        throw new Error(err)
+        
+    }
+    return
 }
 
 const makeUser = async (result: UserCredential | null) => {

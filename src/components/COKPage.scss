@@ -1,0 +1,12 @@
+.cokPage{
+    padding: 16px;
+
+    .buttons{
+        width: calc(100% - 32px);
+        bottom: 16px;
+        gap: 8px;
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+    }
+}

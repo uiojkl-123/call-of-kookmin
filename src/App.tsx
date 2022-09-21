@@ -41,12 +41,12 @@ import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
 import { Call } from './pages/Call';
 import { Select } from './pages/Select';
+import { Temp } from './pages/Temp';
+import { Accepting } from './components/Accepting';
 
 
 setupIonicReact();
 
-// 22. 9. 8 isLogin 변수 추가
-const isLogin: boolean = true;
 
 const App: React.FC = () => {
 
@@ -94,12 +94,17 @@ const App: React.FC = () => {
           <IonRouterOutlet animated={false}>
             <Route exact path="/main" component={Home} />
             <Route exact path="/">
-              <Redirect to={isLogin ? "/main" : "/login"} />
+              {/*----------고쳐야 해요---------------*/}
+              <Redirect to={false ? "/main" : "/login"} />
+              {/*----------고쳐야 해요---------------*/}
             </Route>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/feedPage" component={FeedPage} />
+            <Route exact path="/feedPage/:pageId" component={FeedPage} />
             <Route exact path="/call" component={Call} />
             <Route exact path="/select/:kind" component={Select} />
+
+            <Route exact path="/temp" component={Temp} />
+            <Route exact path="/accepting" component={Accepting} />
           </IonRouterOutlet>
         )}
       </IonReactRouter>

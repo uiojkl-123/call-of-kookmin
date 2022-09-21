@@ -35,7 +35,7 @@ export const Login: React.FC = () => {
             ; (async () => {
                 await handleGoogleRedirectResult().then(() => {
                     setLoading(false)
-                    history.push('/main')
+                    //history.push('/main')
                 }).catch(err => {
                     setLoading(false)
                     present({ header: '로그인 실패', subHeader: '구글 계정 연동 실패', message: '구글 계정을 가져오는 데에서 문제가 발생했습니다.' + err })
