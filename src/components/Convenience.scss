@@ -26,7 +26,7 @@
                 .menuName{
                     font-size: 20px;
                 }
-                .menuPrice{
+                .menuPrice{                   
                     margin-top: 4px;
                 }
             }
@@ -36,7 +36,7 @@
         }
 
         .unClicked {
-            background-color: white;
+            background-color: var(--ion-card-background);
         }
     }
 
