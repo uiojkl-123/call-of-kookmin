@@ -23,7 +23,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
     return (
         <IonContent className='feedContainer'>
             <div className='toolbar'>
-                <IonIcon icon={arrowBack} className='icon' onClick={() => history.push('/main')} />
+                <IonIcon icon={arrowBack} className='icon' onClick={() => history.goBack()} />
             </div>
 
             <IonCard className='content'>

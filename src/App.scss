@@ -35,10 +35,9 @@ ion-tabs {
 header {
     width: 100%;
     height: 52px;
-    position: fixed;
     z-index:10;
-    box-shadow: 0 2px 4px #00000025;
     background-color: var(--ion-background-color);
+    border-bottom: 0.3px solid var(--c-gray-400);
     
     h1 {
         font-size: 32px;

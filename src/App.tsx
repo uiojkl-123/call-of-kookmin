@@ -1,4 +1,4 @@
-import { Redirect, Route, useHistory } from 'react-router-dom';
+import { Redirect, Route, useHistory, useLocation } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -82,9 +82,6 @@ const App: React.FC = () => {
 
   return (
     <IonApp>
-      <header>
-        <h1>국민의 부름 </h1>
-      </header>
       <IonReactRouter>
         {loading ? (
           <IonLoading
@@ -93,32 +90,22 @@ const App: React.FC = () => {
             message={'기다려 주세요...'}
           />
         ) : (
-          <IonTabs>
-            <IonTabBar slot="top">
-              <IonTabButton tab="tab1" href="/call">
-                <IonLabel>부르기</IonLabel>
-              </IonTabButton>
-              <IonTabButton tab="tab2" href="/accept">
-                <IonLabel>부름에 응답</IonLabel>
-              </IonTabButton>
-            </IonTabBar>
-            <IonRouterOutlet animated={false}>
+          <IonRouterOutlet animated={false}>
 
-              <Route exact path="/">
-                <Redirect to={currentUser ? "/call" : "/login"} />
-              </Route>
-              <Route exact path="/login" component={Login} />
+            <Route exact path="/">
+              <Redirect to={currentUser ? "/call" : "/login"} />
+            </Route>
+            <Route exact path="/login" component={Login} />
 
 
-              <Route exact path="/call" component={Call} />
+            <Route exact path="/call" component={Call} />
 
-              <Route exact path="/accept" component={Accept} />
-              <Route exact path="/feedPage/:pageId" component={FeedPage} />
+            <Route exact path="/accept" component={Accept} />
 
-              <Route exact path="/temp" component={Temp} />
-              <Route exact path="/accepting" component={Accepting} />
-            </IonRouterOutlet>
-          </IonTabs>
+            <Route exact path="/temp" component={Temp} />
+            <Route exact path="/accepting" component={Accepting} />
+            <Route exact path="/feedPage/:pageId" component={FeedPage} />
+          </IonRouterOutlet>
         )}
       </IonReactRouter>
     </IonApp >

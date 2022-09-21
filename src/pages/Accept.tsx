@@ -15,22 +15,22 @@ const Accept: React.FC = () => {
 
   return (
     <IonPage className='acceptPage'>
+       <header>
+        <h1>국민의 부름 </h1>
+      </header>
+      <div className='tabs'>
+        <div onClick={() => history.push('/call')}>부르기</div>
+        <div onClick={() => history.push('/accept')}>부름에 응답</div>
+      </div>
       <IonContent fullscreen>
-
         <div className='feedBox'>
           {db.map((value) => {
             return <IonCard className='ion-padding' mode='ios' onClick={() => history.push('feedPage/' + value.id)}>
-              <span className='feedTitle'>{value.title}</span><br/>
+              <span className='feedTitle'>{value.title}</span><br />
               <span className='feedInfo'>{value.time + ' | ' + value.writer}</span>
             </IonCard>
           })}
         </div>
-
-        <Link to='/call'>
-          <div className='button'>
-            <COKButton text={'부르기'} onClick={()=>{}} />
-          </div>
-        </Link>
       </IonContent>
     </IonPage>
   );
