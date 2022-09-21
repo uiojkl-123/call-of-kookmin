@@ -12,10 +12,9 @@ export const FeedPage: React.FC = () => {
 
   const [idx, setIdx] = useState<number>();
 
-  useEffect(()=>{
+  useEffect(() => {
     setIdx(index)
-  },[index])
-
+  }, [index])
 
   const history = useHistory();
 
@@ -28,35 +27,35 @@ export const FeedPage: React.FC = () => {
           <h1 onClick={() => history.push('/main')}>국민의 부름</h1>
         </IonToolbar>
 
-        <IonCard style={{ marginTop:'80px', padding:'16px' }}>
-        
-          <div style={{width:'100%', height:'40px', display:'flex'}}>
-            <div style={{width:'40px', height:'40px'}}>
+        <IonCard style={{ marginTop: '80px', padding: '16px' }}>
+
+          <div style={{ width: '100%', height: '40px', display: 'flex' }}>
+            <div style={{ width: '40px', height: '40px' }}>
               <IonIcon icon={personCircleOutline} size='large' />
-            </div>  
-            <div style={{width:'100%', height:'40px', marginLeft:'5px'}}>
-              <div style={{height:'20px'}}>
+            </div>
+            <div style={{ width: '100%', height: '40px', marginLeft: '5px' }}>
+              <div style={{ height: '20px' }}>
                 익명(과학관 2층)
               </div>
-              <div style={{height:'20px'}}>
+              <div style={{ height: '20px' }}>
                 5분 전
               </div>
             </div>
           </div>
-          
+
           <br />
-          {idx?  <span style={{fontSize:'20px'}}>{db[idx].title}</span>
-          : null}
-         
+          {idx ? <span style={{ fontSize: '20px' }}>{db[idx].title}</span>
+            : null}
+
           <br /><br />
-          {db[index].content}<br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-          <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-          
+          {db[index].content}<br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
         </IonCard>
 
         <IonButton style={{
