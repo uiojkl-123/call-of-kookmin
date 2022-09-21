@@ -45,14 +45,15 @@ import { Select } from './pages/Select';
 
 setupIonicReact();
 
-// 22. 9. 8 isLogin 변수 추가
-const isLogin: boolean = true;
+
 
 const App: React.FC = () => {
 
+
+  const [isLogin, setIsLogin] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(true)
 
-  const { setCurrentUser } = useStore();
+  const { setCurrentUser, currentUser } = useStore();
 
   const mountRef = useRef<boolean>(true)
 
@@ -68,6 +69,7 @@ const App: React.FC = () => {
         const userData = userSnapshot?.data()
 
         if (mountRef.current) {
+          console.log('dkssud');
           setCurrentUser({ userId: user.uid, ...userData })
           setLoading(false)
         }
@@ -94,7 +96,7 @@ const App: React.FC = () => {
           <IonRouterOutlet animated={false}>
             <Route exact path="/main" component={Home} />
             <Route exact path="/">
-              <Redirect to={isLogin ? "/main" : "/login"} />
+              <Redirect to={currentUser ? "/main" : "/login"} />
             </Route>
             <Route exact path="/login" component={Login} />
             <Route exact path="/feedPage" component={FeedPage} />
