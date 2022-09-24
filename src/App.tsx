@@ -91,7 +91,7 @@ const App: React.FC = () => {
           />
         ) : (
           !currentUser ?
-            <IonRouterOutlet animated>
+            <IonRouterOutlet animated={false} mode='ios'>
 
               <Route exact path="/">
                 <Redirect to={"/login"} />
@@ -100,7 +100,7 @@ const App: React.FC = () => {
               <Route render={() => <Redirect to='/' />} />
             </IonRouterOutlet>
             :
-            <IonRouterOutlet>
+            <IonRouterOutlet animated={false} mode='ios'>
               <Route exact path="/">
                 <Redirect to={"/call"} />
               </Route>
