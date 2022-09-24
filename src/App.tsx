@@ -90,22 +90,29 @@ const App: React.FC = () => {
             message={'기다려 주세요...'}
           />
         ) : (
-          <IonRouterOutlet animated={false}>
+          !currentUser ?
+            <IonRouterOutlet animated>
 
-            <Route exact path="/">
-              <Redirect to={currentUser ? "/call" : "/login"} />
-            </Route>
-            <Route exact path="/login" component={Login} />
+              <Route exact path="/">
+                <Redirect to={"/login"} />
+              </Route>
+              <Route exact path="/login" component={Login} />
+              <Route render={() => <Redirect to='/' />} />
+            </IonRouterOutlet>
+            :
+            <IonRouterOutlet>
+              <Route exact path="/">
+                <Redirect to={"/call"} />
+              </Route>
+              <Route exact path="/call" component={Call} />
 
+              <Route exact path="/accept" component={Accept} />
 
-            <Route exact path="/call" component={Call} />
-
-            <Route exact path="/accept" component={Accept} />
-
-            <Route exact path="/temp" component={Temp} />
-            <Route exact path="/accepting" component={Accepting} />
-            <Route exact path="/feedPage/:pageId" component={FeedPage} />
-          </IonRouterOutlet>
+              <Route exact path="/temp" component={Temp} />
+              <Route exact path="/accepting" component={Accepting} />
+              <Route exact path="/feedPage/:pageId" component={FeedPage} />
+              <Route render={() => <Redirect to='/' />} />
+            </IonRouterOutlet>
         )}
       </IonReactRouter>
     </IonApp >
