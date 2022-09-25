@@ -2,19 +2,21 @@ import { IonButton, IonCard, IonContent, IonIcon, IonItem, IonLabel, IonList, Io
 import { personCircleOutline, arrowBack } from 'ionicons/icons'
 import React, { useRef } from 'react'
 import { useHistory } from 'react-router'
+import { CallFeed } from '../pages/FeedPage'
 import { db } from '../static/constants'
+import { displayTime } from '../util/displayTime'
 import { COKButton } from './COKButton'
 import { COKPage } from './COKPage'
 import './Feed.scss'
 
 interface FeedPageProps {
-    id: string;
+    feed: CallFeed
 }
 
 export const Feed: React.FC<FeedPageProps> = (props) => {
 
+    const feed = props.feed
 
-    const index = db.findIndex(value => value.id === props.id)
     const history = useHistory();
 
     const [presentAlert] = useIonAlert();
@@ -22,64 +24,67 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
 
     return (
         <IonContent className='feedContainer'>
-            <div className='toolbar'>
-                <IonIcon icon={arrowBack} className='icon' onClick={() => history.goBack()} />
-            </div>
-
-            <IonCard className='content'>
-
-                <div className='topBox'>
-                    <div className='leftBox'>
-                        <IonIcon icon={personCircleOutline} size='large' />
+            {feed ?
+                <>
+                    <div className='toolbar'>
+                        <IonIcon icon={arrowBack} className='icon' onClick={() => history.goBack()} />
                     </div>
-                    <div className='rightBox'>
-                        <div className='writerInfoBox'>
-                            {db[index].writer}
+
+                    <IonCard className='content'>
+
+                        <div className='topBox'>
+                            <div className='leftBox'>
+                                <IonIcon icon={personCircleOutline} size='large' />
+                            </div>
+                            <div className='rightBox'>
+                                <div className='writerInfoBox'>
+                                    {feed.writer}
+                                </div>
+                                <div className='timeBox'>
+                                    {displayTime(feed.date)}
+                                </div>
+                            </div>
                         </div>
-                        <div className='timeBox'>
-                            {db[index].time}
-                        </div>
+
+                        <br />
+                        <span style={{ fontSize: '20px' }}>{feed.title}</span>
+
+                        <br /><br />
+                        {feed.content}<br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+
+                    </IonCard>
+
+                    <div className='button'>
+                        <COKButton text={'요청 수락'} onClick={() => {
+                            presentAlert({
+                                mode: 'ios',
+                                header: '이용 약관',
+                                message: policy,
+                                cssClass: 'alert',
+                                buttons: [
+                                    {
+                                        text: '수락',
+                                        role: 'confirm',
+                                        cssClass: 'confirmBtn',
+                                        handler: () => { history.push('/accepting') },
+                                    },
+                                    {
+                                        text: '취소',
+                                        role: 'cancle',
+                                        cssClass: 'cancleBtn',
+                                        handler: () => { },
+                                    },
+                                ],
+
+                            })
+                        }/*() => { history.push('/accepting') }*/} />
                     </div>
-                </div>
-
-                <br />
-                <span style={{ fontSize: '20px' }}>{db[index].title}</span>
-
-                <br /><br />
-                {db[index].content}<br />
-                <br />
-                <br />
-                <br />
-                <br />
-
-            </IonCard>
-
-            <div className='button'>
-                <COKButton text={'요청 수락'} onClick={() => {
-                    presentAlert({
-                        mode: 'ios',
-                        header: '이용 약관',
-                        message: policy,
-                        cssClass: 'alert',
-                        buttons: [
-                            {
-                                text: '수락',
-                                role: 'confirm',
-                                cssClass: 'confirmBtn',
-                                handler: () => { history.push('/accepting') },
-                            },
-                            {
-                                text: '취소',
-                                role: 'cancle',
-                                cssClass: 'cancleBtn',
-                                handler: () => { },
-                            },
-                        ],
-
-                    })
-                }/*() => { history.push('/accepting') }*/} />
-            </div>
-
+                </>
+                : null}
         </IonContent>
     )
 }

@@ -6,6 +6,7 @@ import { COKButton } from '../components/COKButton'
 import { uploadCall } from '../serviece/call.service'
 import './Call.scss'
 import { format, parseISO } from 'date-fns'
+import { useStore } from '../store/store'
 
 export const Call = () => {
 
@@ -13,11 +14,13 @@ export const Call = () => {
 
   const [title, setTitle] = useState<string>('');
   const [content, setContent] = useState<string>('');
-  const [startLocation, setStartLocation] = useState<string>('');
+  const [location, setLocation] = useState<string>('');
 
-  const [price, setPrice] = useState<number>();
+  const [price, setPrice] = useState<number>(1000);
 
   const [date, setDate] = useState<Date>(new Date());
+
+  const { currentUser } = useStore()
 
   const isWeekday = (dateString: string) => {
     const date = new Date(dateString);
@@ -31,12 +34,15 @@ export const Call = () => {
   }
 
   const handleCall = async () => {
+    if (!currentUser?.userId) return;
     const call = {
       title: title,
       content: content,
-      startLocation: startLocation,
+      location: location,
       price: price,
-      date: date
+      date: date,
+      createdAt: new Date(),
+      writer: currentUser?.userId
     }
     await uploadCall(call)
     alert('부름 완료')
@@ -66,7 +72,7 @@ export const Call = () => {
           <IonItem>
             <IonLabel position='stacked'>도착지 *</IonLabel>
 
-            <IonInput value={startLocation} onIonChange={(e: any) => setStartLocation(e.target.value)} ></IonInput>
+            <IonInput value={location} onIonChange={(e: any) => setLocation(e.target.value)} ></IonInput>
           </IonItem>
           <IonItem>
             <IonLabel position='stacked'>가격 *</IonLabel>

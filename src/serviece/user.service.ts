@@ -49,3 +49,10 @@ const makeUser = async (result: UserCredential | null) => {
     }, { merge: true }).catch((err) => console.log(err))
     return
 }
+
+export const getUserNameById = async (id: string) => {
+    const docRef = doc(db, 'user', id);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) { throw new Error('존재하지 않는 유저입니다.') }
+    return docSnap.data()?.userName;
+}
