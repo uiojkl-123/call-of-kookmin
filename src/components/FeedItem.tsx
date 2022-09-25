@@ -12,7 +12,7 @@ interface FeedItemProps {
 
 export const FeedItem: React.FC<FeedItemProps> = (props) => {
     const feed = props.feed
-    console.log(feed);
+    //console.log(feed);
 
 
     const mountRef = React.useRef(true);

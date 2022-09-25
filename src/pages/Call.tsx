@@ -49,26 +49,14 @@ export const Call = () => {
   }
 
   return (
-    <IonPage className='callPage'>
-      <header>
-        <h1>국민의 부름 </h1>
-      </header>
-
-      <div className='tabs'>
-        <div onClick={() => history.push('/call')} className='ion-activatable'>부르기
-          <IonRippleEffect type='bounded'></IonRippleEffect></div>
-        <div onClick={() => history.push('/accept')}>부름에 응답</div>
-      </div>
-
+    <>
       <IonContent className='container' >
         <div className='content'>
           <IonItem>
             <IonLabel position='stacked'>제목 *</IonLabel>
             <IonInput value={title} onIonChange={(e: any) => setTitle(e.target.value)} ></IonInput>
           </IonItem>
-          <div className='precautions'>
-            (요청 위치, 요청 시간, 요청 사항을 필수적으로 포함해서 작성해주시기 바랍니다.)
-          </div>
+
           <IonItem>
             <IonLabel position='stacked'>도착지 *</IonLabel>
 
@@ -96,6 +84,6 @@ export const Call = () => {
       <IonModal mode='ios' keepContentsMounted={true}>
         <IonDatetime mode='ios' id="datetime" minuteValues="0,15,30,45" onIonChange={(e: any) => { setDate(parseISO(e.detail.value)) }} isDateEnabled={isWeekday}></IonDatetime>
       </IonModal>
-    </IonPage>
+    </>
   )
 }

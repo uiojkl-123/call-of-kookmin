@@ -64,16 +64,7 @@ const Accept: React.FC = () => {
 
 
   return (
-    <IonPage className='acceptPage'>
-      <header>
-        <h1>국민의 부름 </h1>
-      </header>
-      <div className='tabs'>
-        <div onClick={() => history.push('/call')}>부르기</div>
-        <div onClick={() => history.push('/accept')}>부름에 응답</div>
-      </div>
       <IonContent fullscreen>
-
 
         {data ?
           loading ?
@@ -127,7 +118,6 @@ const Accept: React.FC = () => {
           : <h1>피드가 없습니다.</h1>
         }
       </IonContent>
-    </IonPage>
   );
 };
 

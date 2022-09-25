@@ -1,5 +1,5 @@
-.callPage {
-    padding-bottom: 52px;
+.mainPage {
+    padding-bottom: 24px;
 
     .tabs {
         width: 100%;
@@ -16,12 +16,28 @@
             line-height: 52px;
         }
 
+        .clicked,
+        .unClicked {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .clicked {
+            //background-color: var(--ion-color-primary-shade);
+            color: var(--c-gray-800);
+            border-bottom: 2px solid var(--c-gray-800);
+        }
+
+        .unClicked {
+            //background-color: var(--ion-background-color);
+            color: var(--c-gray-500);
+
+        }
+
         user-select: none;
         cursor: pointer;
         z-index: 1000000;
 
     }
-
 
     .container {
         .toolbar {
@@ -41,15 +57,28 @@
             margin-top: 24px;
             padding: 0 16px;
 
-            ion-textarea{
-                padding: 8px;
+            .precautions {
+                font-weight: 300;
+                color: var(--c-gray-600);
+                padding-bottom: 16px;
+            }
+
+            ion-textarea {
+                // padding: 8px;
                 height: 500px;
+            }
+
+            .placeHolderText {
+                width:100px;
+                color: var(--ion-text-color);
+                font-family: var(--ion-font-family);
+                opacity: 0.5;
             }
         }
 
 
         .button {
-            height: 72px;
+            height: 80px;
             padding: 16px 16px 16px;
             width: 100%;
             bottom: 0;
@@ -59,6 +88,24 @@
             flex-direction: row;
             justify-content: center;
             background-color: var(--ion-background-color);
+        }
+    }
+
+    .feedBox {
+
+        .ion-padding {
+            height: 70px;
+            margin: 16px;
+            padding: 16px;
+        }
+
+        .feedTitle {
+            font-size: 16px;
+        }
+
+        .feedInfo {
+            font-size: 12px;
+            color: var(--c-gray-600)
         }
     }
 }

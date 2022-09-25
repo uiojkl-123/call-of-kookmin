@@ -42,6 +42,7 @@ import { useStore } from './store/store';
 import { Call } from './pages/Call';
 import { Temp } from './pages/Temp';
 import { Accepting } from './components/Accepting';
+import Main from './pages/Main';
 
 
 setupIonicReact();
@@ -102,11 +103,13 @@ const App: React.FC = () => {
             :
             <IonRouterOutlet animated={false} mode='ios'>
               <Route exact path="/">
-                <Redirect to={"/call"} />
+                <Redirect to={"/main"} />
               </Route>
               <Route exact path="/call" component={Call} />
 
               <Route exact path="/accept" component={Accept} />
+
+              <Route exact path="/main" component={Main} />
 
               <Route exact path="/temp" component={Temp} />
               <Route exact path="/accepting" component={Accepting} />

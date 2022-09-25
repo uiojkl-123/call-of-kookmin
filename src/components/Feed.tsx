@@ -3,10 +3,12 @@ import { personCircleOutline, arrowBack } from 'ionicons/icons'
 import React, { useRef } from 'react'
 import { useHistory } from 'react-router'
 import { CallFeed } from '../pages/FeedPage'
+import { deleteCall } from '../serviece/call.service'
 import { db } from '../static/constants'
 import { displayTime } from '../util/displayTime'
 import { COKButton } from './COKButton'
 import { COKPage } from './COKPage'
+import { useStore } from '../store/store'
 import './Feed.scss'
 
 interface FeedPageProps {
@@ -21,6 +23,13 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
 
     const [presentAlert] = useIonAlert();
     const policy: string = '1. 튀지 말기\n2. 늦지 말기';
+
+    const { currentUser } = useStore();
+
+    const handleDelete = async () => {
+        await deleteCall(feed.id)
+        history.push('/main')
+    }
 
     return (
         <IonContent className='feedContainer'>
@@ -39,6 +48,12 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                             <div className='rightBox'>
                                 <div className='writerInfoBox'>
                                     {feed.writer}
+
+                                    {currentUser?.userId === feed.writer ?
+                                        <button className='deleteButton' onClick={() => { handleDelete() }}> 삭제 </button>
+                                        : null
+                                    }
+
                                 </div>
                                 <div className='timeBox'>
                                     {displayTime(feed.date)}
@@ -85,6 +100,6 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                     </div>
                 </>
                 : null}
-        </IonContent>
+        </IonContent >
     )
 }
