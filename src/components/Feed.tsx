@@ -73,6 +73,12 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
 
                     </IonCard>
 
+                    <div className='details'>
+                        시간 : {feed.date.toString()} <br />
+                        요청지 : {feed.location} <br />
+                        팁 : {feed.price} 원
+                    </div>
+
                     <div className='button'>
                         <COKButton text={'요청 수락'} onClick={() => {
                             presentAlert({
