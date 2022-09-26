@@ -105,11 +105,9 @@ const App: React.FC = () => {
               <Route exact path="/">
                 <Redirect to={"/main"} />
               </Route>
-              <Route exact path="/call" component={Call} />
+              <Route exact path='/main' component={Main}/>
 
               <Route exact path="/accept" component={Accept} />
-
-              <Route exact path="/main" component={Main} />
 
               <Route exact path="/temp" component={Temp} />
               <Route exact path="/accepting" component={Accepting} />
