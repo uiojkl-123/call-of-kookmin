@@ -10,6 +10,7 @@ import { COKButton } from './COKButton'
 import { COKPage } from './COKPage'
 import { useStore } from '../store/store'
 import './Feed.scss'
+import { useFeedStore } from '../store/feedStore'
 
 interface FeedPageProps {
     feed: CallFeed
@@ -21,6 +22,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
 
     const history = useHistory();
 
+    const { initData } = useFeedStore()
     const [presentAlert] = useIonAlert();
     const policy: string = '1. 튀지 말기\n2. 늦지 말기';
 
@@ -28,6 +30,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
 
     const handleDelete = async () => {
         await deleteCall(feed.id)
+        await initData()
         history.push('/main')
     }
 

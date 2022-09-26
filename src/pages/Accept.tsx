@@ -14,6 +14,7 @@ import { displayTime } from '../util/displayTime';
 import { getUserNameById } from '../serviece/user.service';
 import { FeedItem } from '../components/FeedItem';
 import { CallFeed } from './FeedPage';
+import { useFeedStore } from '../store/feedStore';
 
 const Accept: React.FC = () => {
 
@@ -21,29 +22,17 @@ const Accept: React.FC = () => {
 
   const { currentUser } = useStore()
 
-  const [data, setData] = useState<CallFeed[]>([]);
-  const [lastKey, setLastKey] = useState<QueryDocumentSnapshot>();
   const [isInfiniteDisabled, setInfiniteDisabled] = useState(false);
-  const [loading, setLoading] = useState(true);
+
+  const { feedData, initData, loading, lastKey } = useFeedStore()
 
   const mountRef = useRef(true)
-  console.log(data);
+  console.log(feedData);
 
-
-  const initFeedData = async () => {
-    setData([])
-    setLastKey(undefined)
-    setLoading(true)
-    const response = await getFirstFeed()
-    if (!mountRef.current) { return }
-    setData(response.data)
-    setLastKey(response.lastVisible)
-    setLoading(false)
-  }
 
   useEffect(() => {
     (async () => {
-      await initFeedData()
+      await initData()
     })()
     return () => {
       mountRef.current = false
@@ -53,8 +42,7 @@ const Accept: React.FC = () => {
   const pushData = async () => {
     if (lastKey === undefined) { setInfiniteDisabled(true); return }
     const newData = await getNextFeed(lastKey);
-    setData([...data, ...newData.newData]);
-    setLastKey(newData.lastVisible)
+    useFeedStore.setState({ feedData: [...feedData, ...newData.newData], lastKey: newData.lastVisible })
   }
 
   const loadData = async (e: any) => {
@@ -64,60 +52,60 @@ const Accept: React.FC = () => {
 
 
   return (
-      <IonContent fullscreen>
+    <IonContent fullscreen>
 
-        {data ?
-          loading ?
+      {feedData ?
+        loading ?
+          <div className='feedListContainer'>
+            <IonList className='skeletonFeedList'>
+              {[1, 1, 1].map((value, index) => {
+                return (
+                  <IonCard key={index} className='skeletonfeedCard'>
+                    <IonCardHeader>
+                      <IonRow>
+                        <IonAvatar><IonSkeletonText animated></IonSkeletonText></IonAvatar>
+                        <div><IonSkeletonText animated ></IonSkeletonText></div>
+                        <div><IonSkeletonText animated ></IonSkeletonText></div>
+                      </IonRow>
+                    </IonCardHeader>
+                    <IonCardContent >
+                      <IonSkeletonText className='title' animated ></IonSkeletonText>
+                      <IonSkeletonText animated ></IonSkeletonText>
+                      <IonSkeletonText animated ></IonSkeletonText>
+                      <IonSkeletonText animated ></IonSkeletonText>
+                      <IonSkeletonText animated ></IonSkeletonText>
+                      <IonSkeletonText animated ></IonSkeletonText>
+                      <IonSkeletonText animated className='big'></IonSkeletonText>
+                    </IonCardContent>
+                  </IonCard>
+                )
+              })}
+            </IonList>
+          </div>
+          :
+          <>
             <div className='feedListContainer'>
-              <IonList className='skeletonFeedList'>
-                {[1, 1, 1].map((value, index) => {
-                  return (
-                    <IonCard key={index} className='skeletonfeedCard'>
-                      <IonCardHeader>
-                        <IonRow>
-                          <IonAvatar><IonSkeletonText animated></IonSkeletonText></IonAvatar>
-                          <div><IonSkeletonText animated ></IonSkeletonText></div>
-                          <div><IonSkeletonText animated ></IonSkeletonText></div>
-                        </IonRow>
-                      </IonCardHeader>
-                      <IonCardContent >
-                        <IonSkeletonText className='title' animated ></IonSkeletonText>
-                        <IonSkeletonText animated ></IonSkeletonText>
-                        <IonSkeletonText animated ></IonSkeletonText>
-                        <IonSkeletonText animated ></IonSkeletonText>
-                        <IonSkeletonText animated ></IonSkeletonText>
-                        <IonSkeletonText animated ></IonSkeletonText>
-                        <IonSkeletonText animated className='big'></IonSkeletonText>
-                      </IonCardContent>
-                    </IonCard>
-                  )
-                })}
+              <IonRefresher slot="fixed" onIonRefresh={initData}>
+                <IonRefresherContent></IonRefresherContent>
+              </IonRefresher>
+              <IonList className='feedList'>
+                {feedData.map((value) => <FeedItem feed={value} key={value.id}></FeedItem>)}
               </IonList>
+              <IonInfiniteScroll
+                onIonInfinite={loadData}
+                threshold="20px"
+                disabled={isInfiniteDisabled}
+              >
+                <IonInfiniteScrollContent
+                  loadingSpinner='crescent'
+                  loadingText=""
+                ></IonInfiniteScrollContent>
+              </IonInfiniteScroll>
             </div>
-            :
-            <>
-              <div className='feedListContainer'>
-                <IonRefresher slot="fixed" onIonRefresh={initFeedData}>
-                  <IonRefresherContent></IonRefresherContent>
-                </IonRefresher>
-                <IonList className='feedList'>
-                  {data.map((value) => <FeedItem feed={value} key={value.id}></FeedItem>)}
-                </IonList>
-                <IonInfiniteScroll
-                  onIonInfinite={loadData}
-                  threshold="20px"
-                  disabled={isInfiniteDisabled}
-                >
-                  <IonInfiniteScrollContent
-                    loadingSpinner='crescent'
-                    loadingText=""
-                  ></IonInfiniteScrollContent>
-                </IonInfiniteScroll>
-              </div>
-            </>
-          : <h1>피드가 없습니다.</h1>
-        }
-      </IonContent>
+          </>
+        : <h1>피드가 없습니다.</h1>
+      }
+    </IonContent>
   );
 };
 
