@@ -13,6 +13,6 @@ export const callConverter = {
     },
     fromFirestore: function (snapshot: { data: (arg0: any) => any; id: string; }, options: any) {
         const data = snapshot.data(options);
-        return new Call(snapshot.id, data.title, data.content, data.price, data.date, data.startLocation, data.createdAt, data.writer);
+        return new Call(snapshot.id, data.title, data.content, data.price, data.date, data.location, data.createdAt, data.writer);
     },
 };
