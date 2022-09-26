@@ -77,7 +77,7 @@ export const Call = () => {
         </div>
 
         <div className='button' >
-          <COKButton text={'부르기'} onClick={handleCall} />
+          <COKButton disabled={title && location && price && content ? false : true} text={'부르기'} onClick={handleCall} />
         </div>
       </IonContent>
 
