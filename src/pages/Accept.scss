@@ -1,18 +1,13 @@
-.feedListContainer{
-    margin-top:16px;
+.feedListContainer {
+    margin-top: 16px;
 }
 
-.feedBox {
-    padding-bottom: 70px;
-
-    .ion-padding {
-        height: 70px;
-        margin: 16px;
-        padding: 16px;
-    }
+.feedCard {
+    padding: 16px;
+    margin: 16px;
 
     .feedTitle {
-        font-size: 16px;
+        // font-size: 8px;
     }
 
     .feedInfo {

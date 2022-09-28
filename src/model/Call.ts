@@ -1,5 +1,5 @@
-export class Call {
-    id?: string
+export class CallClass {
+    id: string
     title: string
     content: string
     price: number
@@ -7,8 +7,9 @@ export class Call {
     location: string
     createdAt: Date
     writer: string
+    isMatched : boolean
 
-    constructor(id: string | undefined, title: string, content: string, price: number, date: Date, location: string, createdAt: Date, writer: string) {
+    constructor(id: string, title: string, content: string, price: number, date: Date, location: string, createdAt: Date, writer: string, isMatched:boolean) {
         this.id = id
         this.title = title
         this.content = content
@@ -17,5 +18,6 @@ export class Call {
         this.location = location
         this.createdAt = createdAt
         this.writer = writer
+        this.isMatched = isMatched
     }
 }

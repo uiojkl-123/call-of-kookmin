@@ -1,18 +1,20 @@
-import { Call } from "../model/Call";
+import { CallClass } from "../model/Call";
 
 export const callConverter = {
-    toFirestore: function (call: Call) {
+    toFirestore: function (call: CallClass) {
         return {
+            id: call.id,
             title: call.title,
             content: call.content,
             date: call.date,
             startLocation: call.location,
             createdAt: call.createdAt,
-            writer: call.writer
+            writer: call.writer,
+            isMatched: call.isMatched,
         };
     },
     fromFirestore: function (snapshot: { data: (arg0: any) => any; id: string; }, options: any) {
         const data = snapshot.data(options);
-        return new Call(snapshot.id, data.title, data.content, data.price, data.date, data.location, data.createdAt, data.writer);
+        return new CallClass(snapshot.id, data.title, data.content, data.price, data.date, data.location, data.createdAt, data.writer, data.isMatched);
     },
 };

@@ -3,20 +3,20 @@ import { DocumentReference } from 'firebase/firestore';
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Feed } from '../components/Feed';
-import { Call } from '../model/Call';
+import { CallClass } from '../model/Call';
 import { getOneFeed } from '../serviece/accept.service';
 
-type pageParams = { pageId: string }
+type pageParams = { feedId: string }
 
-export interface CallFeed extends Call {
-  feedRef: DocumentReference<Call>
+export interface CallFeed extends CallClass {
+  feedRef: DocumentReference<CallClass>
 }
 
 export const FeedPage: React.FC = () => {
 
   const history = useHistory();
 
-  const { pageId } = useParams<pageParams>();
+  const { feedId: pageId } = useParams<pageParams>();
 
   const [feed, setFeed] = useState<CallFeed>();
 
@@ -34,7 +34,7 @@ export const FeedPage: React.FC = () => {
         throw new Error(e);
     }
     })()
-  }, [])
+  }, [pageId])
 
   useEffect(() => {
     return () => {

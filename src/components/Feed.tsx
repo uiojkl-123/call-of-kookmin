@@ -11,6 +11,7 @@ import { COKPage } from './COKPage'
 import { useStore } from '../store/store'
 import './Feed.scss'
 import { useFeedStore } from '../store/feedStore'
+import { acceptFeed } from '../serviece/accept.service'
 
 interface FeedPageProps {
     feed: CallFeed
@@ -94,7 +95,11 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                         text: '수락',
                                         role: 'confirm',
                                         cssClass: 'confirmBtn',
-                                        handler: () => { history.push('/accepting') },
+                                        handler: () => {
+                                            acceptFeed(feed.id);
+
+                                            history.push('/accepting')
+                                        },
                                     },
                                     {
                                         text: '취소',
@@ -104,7 +109,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                     },
                                 ],
 
-                            })
+                            });
                         }/*() => { history.push('/accepting') }*/} />
                     </div>
                 </>

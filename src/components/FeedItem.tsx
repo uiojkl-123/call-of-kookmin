@@ -29,9 +29,9 @@ export const FeedItem: React.FC<FeedItemProps> = (props) => {
 
 
     return (
-        <IonCard className='ion-padding' mode='ios' onClick={() => history.push('feedPage/' + feed.id)}>
+        <IonCard className='feedCard' mode='ios' onClick={() => history.push('feedPage/' + feed.id)}>
             <IonRow>
-                <div>
+                <div >
                     <span className='feedTitle'>{feed.title}</span><br />
                     <span className='feedInfo'>{displayTime(feed.createdAt)}</span>
                 </div>

@@ -39,7 +39,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
 import { useStore } from './store/store';
-import { Call } from './pages/Call';
 import { Temp } from './pages/Temp';
 import { Accepting } from './components/Accepting';
 import Main from './pages/Main';
@@ -111,7 +110,7 @@ const App: React.FC = () => {
 
               <Route exact path="/temp" component={Temp} />
               <Route exact path="/accepting" component={Accepting} />
-              <Route exact path="/feedPage/:pageId" component={FeedPage} />
+              <Route exact path="/feedPage/:feedId" component={FeedPage} />
               <Route render={() => <Redirect to='/' />} />
             </IonRouterOutlet>
         )}

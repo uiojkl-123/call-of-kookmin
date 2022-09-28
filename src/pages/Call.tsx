@@ -7,6 +7,9 @@ import { uploadCall } from '../serviece/call.service'
 import './Call.scss'
 import { format, parseISO } from 'date-fns'
 import { useStore } from '../store/store'
+import { Timestamp } from 'firebase/firestore'
+import { isMatch } from 'date-fns/esm'
+import { CallClass } from '../model/Call'
 
 export const Call = () => {
 
@@ -42,7 +45,8 @@ export const Call = () => {
       price: price,
       date: date,
       createdAt: new Date(),
-      writer: currentUser?.userId
+      writer: currentUser?.userId,
+      isMatched: false
     }
     await uploadCall(call)
     alert('부름 완료')
@@ -77,7 +81,7 @@ export const Call = () => {
         </div>
 
         <div className='button' >
-          <COKButton disabled={title && location && price && content ? false : true} text={'부르기'} onClick={handleCall} />
+          <COKButton disabled={!(title && location && price && content)} text={'부르기'} onClick={handleCall} />
         </div>
       </IonContent>
 

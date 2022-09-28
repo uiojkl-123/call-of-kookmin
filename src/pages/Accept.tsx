@@ -6,7 +6,7 @@ import { db } from '../static/constants';
 import { Link } from 'react-router-dom';
 import { COKButton } from '../components/COKButton';
 import { useEffect, useRef, useState } from 'react';
-import { Call } from '../model/Call';
+import { CallClass } from '../model/Call';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 import { getFirstFeed, getNextFeed } from '../serviece/accept.service';
 import { Feed } from '../components/Feed';
@@ -84,7 +84,7 @@ const Accept: React.FC = () => {
           </div>
           :
           <>
-            <div className='feedListContainer'>
+            <IonContent className='feedListContainer'>
               <IonRefresher slot="fixed" onIonRefresh={initData}>
                 <IonRefresherContent></IonRefresherContent>
               </IonRefresher>
@@ -101,7 +101,7 @@ const Accept: React.FC = () => {
                   loadingText=""
                 ></IonInfiniteScrollContent>
               </IonInfiniteScroll>
-            </div>
+            </IonContent>
           </>
         : <h1>피드가 없습니다.</h1>
       }

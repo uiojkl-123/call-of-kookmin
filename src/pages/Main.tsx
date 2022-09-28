@@ -1,9 +1,9 @@
 import { IonPage } from '@ionic/react';
 import { useState } from 'react';
 import './Main.scss';
-import { Call } from './Call';
-import Accept from './Accept';
 
+import Accept from './Accept';
+import { Call } from './Call';
 
 const Main: React.FC = () => {
 
