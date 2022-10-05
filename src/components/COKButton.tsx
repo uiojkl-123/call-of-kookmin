@@ -13,6 +13,7 @@ interface COKButtonProps{
     style?: Object
     textButton?: boolean
     color?: string
+    key? : string
 }
 
 export /**
@@ -27,6 +28,7 @@ export /**
  * @param {Object} [style={}] - 버튼에 style을 부여할 수 있음
  * @param {boolean} [textButton=false] - 텍스트 버튼인지 여부
  * @param {string} [color=''] - 버튼 색상
+ * @param {string} [key=''] - 키(리렌더링 오류때매)
  * @return {*} 
  */
 const COKButton:React.FC<COKButtonProps> = (props) => {

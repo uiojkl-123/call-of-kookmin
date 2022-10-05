@@ -1,14 +1,14 @@
 .feedListContainer {
     margin-top: 16px;
+    .feedList{
+        background-color: var(--ion-background-color);
+    }
 }
 
 .feedCard {
     padding: 16px;
     margin: 16px;
-
-    .feedTitle {
-        // font-size: 8px;
-    }
+    //box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
 
     .feedInfo {
         font-size: 12px;

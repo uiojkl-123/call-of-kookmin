@@ -2,7 +2,7 @@ import { addDoc, collection, deleteDoc, doc, Firestore, setDoc } from "firebase/
 import { CallClass } from "../model/Call";
 import { useFeedStore } from "../store/feedStore";
 import { callCollectionRef, db } from "./firebase";
-import { loadTossPayments } from '@tosspayments/payment-sdk'
+//import { loadTossPayments } from '@tosspayments/payment-sdk'
 
 export const uploadCall = async (call: any) => {
     try {

@@ -1,17 +1,19 @@
 import { IonButton, IonCard, IonContent, IonIcon, IonItem, IonLabel, IonList, IonModal, IonToolbar, useIonAlert } from '@ionic/react'
 import { personCircleOutline, arrowBack } from 'ionicons/icons'
-import React, { useRef } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { CallFeed } from '../pages/FeedPage'
 import { deleteCall } from '../serviece/call.service'
-import { db } from '../static/constants'
-import { displayTime } from '../util/displayTime'
+import { callTime, displayTime, remainingTime, timeToDate } from '../util/displayTime'
 import { COKButton } from './COKButton'
 import { COKPage } from './COKPage'
 import { useStore } from '../store/store'
 import './Feed.scss'
 import { useFeedStore } from '../store/feedStore'
 import { acceptFeed } from '../serviece/accept.service'
+import { Timestamp } from 'firebase/firestore'
+import { Accepting } from './Accepting'
+import { Count } from './Count'
 
 interface FeedPageProps {
     feed: CallFeed
@@ -34,6 +36,9 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
         await initData()
         history.push('/main')
     }
+
+    const [isOpen, setIsOpen] = useState<boolean>(false);
+
 
     return (
         <IonContent className='feedContainer'>
@@ -60,7 +65,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
 
                                 </div>
                                 <div className='timeBox'>
-                                    {displayTime(feed.date)}
+                                    {displayTime(feed.createdAt)}
                                 </div>
                             </div>
                         </div>
@@ -78,7 +83,8 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                     </IonCard>
 
                     <div className='details'>
-                        시간 : {feed.date.toString()} <br />
+                        요청 시간 : {callTime(feed.date)} <br />
+                        남은 시간 : {remainingTime(feed.date)} <br />
                         요청지 : {feed.location} <br />
                         팁 : {feed.price} 원
                     </div>
@@ -95,10 +101,11 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                         text: '수락',
                                         role: 'confirm',
                                         cssClass: 'confirmBtn',
+                                        id: "open-modal",
                                         handler: () => {
                                             acceptFeed(feed.id);
-
-                                            history.push('/accepting')
+                                            setIsOpen(true);
+                                            //history.push('/accepting')
                                         },
                                     },
                                     {
@@ -110,10 +117,49 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                 ],
 
                             });
-                        }/*() => { history.push('/accepting') }*/} />
+                        }} />
                     </div>
                 </>
                 : null}
+            <IonModal trigger='open-modal' isOpen={isOpen} className='acceptingContainer'>
+                <COKPage title={'달려가는 중...'}
+                    buttons={[{
+                        text: '곧 도착', onClick: () => { }, cancle: false
+                    }, {
+                        text: '취소', onClick: () => {
+                            presentAlert({
+                                mode: 'ios',
+                                header: '취소하면 큰일납니다.\n 그래도 취소하시겠습니까?',
+                                cssClass: 'alert',
+                                buttons: [
+                                    {
+                                        text: '네',
+                                        role: 'confirm',
+                                        cssClass: 'confirmBtn',
+                                        id: "open-modal",
+                                        handler: () => {
+                                            setIsOpen(false);
+                                        },
+                                    },
+                                    {
+                                        text: '아니오',
+                                        role: 'cancle',
+                                        cssClass: 'cancleBtn',
+                                        handler: () => { },
+                                    },
+                                ],
+
+                            });
+                        }, cancle: true
+                    },]} >
+
+                    <IonCard className='acceptingContent'>
+                        남은 시간<br /><br />
+                        <Count time={timeToDate(props.feed.date)} />
+                    </IonCard>
+
+                </COKPage>
+            </IonModal>
         </IonContent >
     )
 }
