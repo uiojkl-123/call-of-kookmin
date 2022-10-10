@@ -40,18 +40,18 @@ export const Count: React.FC<CountProps> = (props) => {
 
     return (
         <div>
-            {countTime.days ? <span>{countTime.days}일</span> : null}
-            {countTime.hours ? <span>{countTime.hours}시간</span> : null}
+            {countTime.days ? <span>{countTime.days + '일 '}</span> : null}
+            {countTime.hours ? <span>{countTime.hours + '시간 '}</span> : null}
 
             {countTime.minutes ?
                 <>
-                    <span className={countTime.minutes < 5 ? 'red' : ''}>{countTime.minutes}</span>분
+                    <span className={countTime.minutes < 5 ? 'red' : ''}>{countTime.minutes + '분 '}</span>
                 </>
                 : null}
 
             {display ?
                 <>
-                    <span className={countTime.minutes < 5 ? 'red' : ''}>{countTime.seconds}</span>초
+                    <span className={countTime.minutes < 5 && (!countTime.hours && !countTime.days) ? 'red' : ''}>{countTime.seconds}</span>초
                 </>
                 :
                 <span>시간 종료</span>

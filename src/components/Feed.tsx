@@ -45,10 +45,57 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
             {feed ?
                 <>
                     <div className='toolbar'>
-                        <IonIcon icon={arrowBack} className='icon' onClick={() => history.goBack()} />
+                        <IonIcon icon={arrowBack} className='backIcon' onClick={() => history.goBack()} />
+                        {currentUser?.userId === feed.writer ?
+                            <span className='deleteButton' onClick={() => {
+                                presentAlert({
+                                    mode: 'ios',
+                                    header: '삭제하시겠습니까?',
+                                    cssClass: 'alert',
+                                    buttons: [
+                                        {
+                                            text: '확인',
+                                            role: 'confirm',
+                                            cssClass: 'confirmBtn',
+                                            id: "open-modal",
+                                            handler: () => {
+                                                handleDelete()
+                                            },
+                                        },
+                                        {
+                                            text: '취소',
+                                            role: 'cancle',
+                                            cssClass: 'cancleBtn',
+                                            handler: () => { },
+                                        },
+                                    ],
+
+                                });
+                            }}> 삭제 </span>
+                            : null
+                        }
                     </div>
 
-                    <IonCard className='content'>
+                    <div className='details'>
+                        <div className='detailsInfo'>
+                            <div className='detailsInfoText'>날짜</div>
+                            <div>{callTime(feed.date)}</div>
+                        </div>
+                        <div className='detailsInfo'>
+                            <div className='detailsInfoText'>남은 시간</div>
+                            <div>{remainingTime(feed.date)}</div>
+                        </div>
+                        <div className='detailsInfo'>
+                            <div className='detailsInfoText'>요청지</div>
+                            <div>{feed.location}</div>
+                        </div>
+                        <div className='detailsInfo'>
+                            <div className='detailsInfoText'>팁</div>
+                            <div>{feed.price} 원</div>
+                        </div>
+                    </div>
+
+                    <div className='content'>
 
                         <div className='topBox'>
                             <div className='leftBox'>
@@ -57,12 +104,6 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                             <div className='rightBox'>
                                 <div className='writerInfoBox'>
                                     {feed.writer}
-
-                                    {currentUser?.userId === feed.writer ?
-                                        <button className='deleteButton' onClick={() => { handleDelete() }}> 삭제 </button>
-                                        : null
-                                    }
-
                                 </div>
                                 <div className='timeBox'>
                                     {displayTime(feed.createdAt)}
@@ -80,14 +121,9 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                         <br />
                         <br />
 
-                    </IonCard>
-
-                    <div className='details'>
-                        요청 시간 : {callTime(feed.date)} <br />
-                        남은 시간 : {remainingTime(feed.date)} <br />
-                        요청지 : {feed.location} <br />
-                        팁 : {feed.price} 원
                     </div>
+
+
 
                     <div className='button'>
                         <COKButton text={'요청 수락'} onClick={() => {
@@ -103,7 +139,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                         cssClass: 'confirmBtn',
                                         id: "open-modal",
                                         handler: () => {
-                                            acceptFeed(feed.id);
+                                            acceptFeed(feed.id, true, feed.writer);
                                             setIsOpen(true);
                                             //history.push('/accepting')
                                         },
@@ -139,6 +175,7 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                                         id: "open-modal",
                                         handler: () => {
                                             setIsOpen(false);
+                                            acceptFeed(feed.id, false, feed.writer);
                                         },
                                     },
                                     {
@@ -153,10 +190,25 @@ export const Feed: React.FC<FeedPageProps> = (props) => {
                         }, cancle: true
                     },]} >
 
-                    <IonCard className='acceptingContent'>
+                    <div className='acceptingContent'>
                         남은 시간<br /><br />
-                        <Count time={timeToDate(props.feed.date)} />
-                    </IonCard>
+                        <Count time={timeToDate(props.feed.date)} /><br />
+                        <br /><br />
+                        <div className='acceptingContentInfo'>
+                            <div className='acceptingContentInfoBoxes'>
+                                <div>요청 사항</div>
+                                <div>{feed.content}</div>
+                            </div>
+                            <div className='acceptingContentInfoBoxes'>
+                                <div>요청지</div> 
+                                <div>{feed.location}</div>
+                            </div>
+                            <div className='acceptingContentInfoBoxes'>
+                                <div>팁</div> 
+                                <div>{feed.price} 원</div>
+                            </div>
+                        </div>
+                    </div>
 
                 </COKPage>
             </IonModal>

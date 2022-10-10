@@ -1,13 +1,18 @@
 .mainPage {
     padding-bottom: 24px;
 
+    .header{
+        background-color: var(--c-gray-100);
+    }
+
     .tabs {
         width: 100%;
         height: 52px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: var(--ion-background-color);
+        background-color: var(--c-gray-100);
+        box-shadow: 0.5px 0.5px 0.5px rgba(0,0,0,0.1);
 
         div {
             width: 50%;
@@ -22,13 +27,11 @@
         }
 
         .clicked {
-            //background-color: var(--ion-color-primary-shade);
             color: var(--c-gray-800);
             border-bottom: 2px solid var(--c-gray-800);
         }
 
         .unClicked {
-            //background-color: var(--ion-background-color);
             color: var(--c-gray-500);
 
         }

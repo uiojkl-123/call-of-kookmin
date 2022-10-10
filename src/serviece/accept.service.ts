@@ -32,10 +32,14 @@ export const getOneFeed = async (feedId: string): Promise<CallFeed> => {
     return result;
 }
 
-export const acceptFeed = async (feedId: string): Promise<void> => {
+
+export const acceptFeed = async (feedId: string, matchedValue : boolean, userId:string): Promise<void> => {
     try {
         const docRef = doc(db, 'call', feedId).withConverter(callConverter);
-        await updateDoc(docRef, { isMatched: true });
+        const userDocRef = doc(db, 'user', userId).withConverter(callConverter);
+        await 
+            updateDoc(docRef, { isMatched: matchedValue });
+            updateDoc(userDocRef, { matchedFeed: matchedValue ? feedId : '' });
     }
     catch (e: any) {
         alert('업데이트를 하지 못했습니다. 다시 시도해주세요. \n상세: ' + e);

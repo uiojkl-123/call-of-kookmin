@@ -1,8 +1,12 @@
 .cokPage{
-    padding: 16px;
+
+    h1{
+        margin-left:16px;
+    }
 
     .buttons{
         width: calc(100% - 32px);
+        left:16px;
         bottom: 16px;
         gap: 8px;
         position: fixed;

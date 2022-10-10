@@ -73,10 +73,10 @@ export function remainingTime(value: Timestamp | WrongTimestamp | Date) {
     const betweenTimeDay = Math.floor(betweenTime / 3600 / 24);
 
     return `${Math.floor(betweenTimeDay / 365) ? Math.floor(betweenTimeDay / 365) + ' 년' : ''}
-    ${betweenTimeDay ? betweenTimeDay % 365 + ' 일': ''}
-    ${betweenTimeHour ? betweenTimeHour + ' 시간' : ''}
-    ${betweenTimeMinute ? betweenTimeMinute + ' 분' : ''}
-    ${betweenTimeSecond ? betweenTimeSecond + ' 초' : ''}
+    ${betweenTimeDay ? betweenTimeDay % 365 + '일': ''}
+    ${betweenTimeHour ? betweenTimeHour + '시간' : ''}
+    ${betweenTimeMinute ? betweenTimeMinute + '분' : ''}
+    ${betweenTimeSecond ? betweenTimeSecond + '초' : ''}
     `;
 }
 

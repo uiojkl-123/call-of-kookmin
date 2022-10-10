@@ -29,15 +29,16 @@ export const FeedItem: React.FC<FeedItemProps> = (props) => {
 
 
     return (
-        <IonCard className='feedCard' mode='ios' onClick={() => history.push('feedPage/' + feed.id)}>
-            <IonRow>
+        <div className='feedCard' onClick={() => history.push('feedPage/' + feed.id)}>
+            <IonRow className='cardLayout'>
                 <div >
                     <span className='feedTitle'>{feed.title}</span><br />
                     <span className='feedInfo'>{displayTime(feed.createdAt)}</span>
                 </div>
-                <hr/>
-                <span>{feed.price + '원'}</span>
+                <div>
+                    <span className='feedPrice'>{feed.price + '원'}</span>
+                </div>
             </IonRow>
-        </IonCard>
+        </div>
     );
 }

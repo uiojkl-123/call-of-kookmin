@@ -3,7 +3,7 @@ import { devtools } from 'zustand/middleware'
 
 interface CurrentUser {
     userId?: string,
-    userName?: string
+    userName?: string,
 }
 
 interface StoreType {

@@ -86,7 +86,7 @@ export const Call = () => {
       </IonContent>
 
       <IonModal mode='ios' keepContentsMounted={true}>
-        <IonDatetime mode='ios' id="datetime" minuteValues="0,15,30,45" onIonChange={(e: any) => { setDate(parseISO(e.detail.value)) }} isDateEnabled={isWeekday}></IonDatetime>
+        <IonDatetime mode='ios' id="datetime" minuteValues={[0,5,10,15,20,25,30,35,40,45,50,55]} onIonChange={(e: any) => { setDate(parseISO(e.detail.value)) }} isDateEnabled={isWeekday}></IonDatetime>
       </IonModal>
     </>
   )

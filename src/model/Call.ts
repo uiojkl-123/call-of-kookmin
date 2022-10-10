@@ -8,6 +8,7 @@ export class CallClass {
     createdAt: Date
     writer: string
     isMatched : boolean
+    matchedFeed?: string
 
     constructor(id: string, title: string, content: string, price: number, date: Date, location: string, createdAt: Date, writer: string, isMatched:boolean) {
         this.id = id
