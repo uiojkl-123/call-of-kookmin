@@ -34,7 +34,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import './App.scss'
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, onSnapshot } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useEffect, useRef, useState } from 'react';
 import { auth, db } from './serviece/firebase';
@@ -58,18 +58,13 @@ const App: React.FC = () => {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userSnapshot = await getDoc(doc(db, 'user', user.uid))
-        if (!userSnapshot.exists()) {
-          setLoading(false)
-          return
-        }
-        if (!userSnapshot) { return }
-        const userData = userSnapshot?.data()
-
-        if (mountRef.current) {
-          setCurrentUser({ userId: user.uid, ...userData })
-          setLoading(false)
-        }
+        const unsubscribe = onSnapshot(doc(db, 'user', user.uid), (userSnapshot) => {
+          if (mountRef.current && userSnapshot.exists()) {
+            const userData = userSnapshot?.data()
+            setCurrentUser({ userId: user.uid, ...userData })
+            setLoading(false)
+          }
+        })
       } else {
         setLoading(false)
       }
@@ -104,7 +99,7 @@ const App: React.FC = () => {
               <Route exact path="/">
                 <Redirect to={"/main"} />
               </Route>
-              <Route exact path='/main' component={Main}/>
+              <Route exact path='/main' component={Main} />
 
               <Route exact path="/accept" component={Accept} />
 
