@@ -4,6 +4,7 @@ import { devtools } from 'zustand/middleware'
 interface CurrentUser {
     userId?: string,
     userName?: string,
+    matchedFeed?: string,
 }
 
 interface StoreType {
@@ -11,6 +12,7 @@ interface StoreType {
     setCurrentUser: (e: CurrentUser) => void;
     currentUserReset: Function;
     loading: boolean;
+
 }
 
 const store = (set: any): StoreType => ({
