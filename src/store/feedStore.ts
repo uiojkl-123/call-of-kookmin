@@ -25,8 +25,8 @@ const store = (set: any): FeedStoreType => ({
             const response = await getFirstFeed()
             set({ feedData: response.data, loading: false, lastKey: response.lastVisible })
         }
-        catch (e) {
-            console.log(e)
+        catch (e) { 
+            console.error(e)
             set({ loading: false })
         }
     }

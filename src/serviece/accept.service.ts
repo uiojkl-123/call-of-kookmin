@@ -4,6 +4,13 @@ import { callCollectionRef, db } from "./firebase";
 import { callConverter } from "./firebaseConverters";
 
 
+/**
+ * **부름 조회**
+ * 
+ * 요청 만료, 매치 완료된 부름은 조회하지 않는다.
+ *
+ * @return {*} 
+ */
 export const getFirstFeed = async () => {
     const first = query(callCollectionRef, orderBy("createdAt", 'desc'), where("isMatched", "==", false), limit(12)).withConverter(callConverter);
     const documentSnapshots = await getDocs(first);
@@ -13,6 +20,7 @@ export const getFirstFeed = async () => {
     });
     return { data: result, lastVisible: lastVisible };
 }
+
 
 export const getNextFeed = async (lastVisible: QueryDocumentSnapshot) => {
     const next = query(callCollectionRef, orderBy("createdAt", 'desc'), startAfter(lastVisible), where("isMatched", "==", false), limit(12)).withConverter(callConverter);
@@ -33,13 +41,12 @@ export const getOneFeed = async (feedId: string): Promise<CallFeed> => {
 }
 
 
-export const acceptFeed = async (feedId: string, matchedValue : boolean, userId:string): Promise<void> => {
+export const acceptFeed = async (feedId: string, matchedValue: boolean, userId: string): Promise<void> => {
     try {
         const docRef = doc(db, 'call', feedId).withConverter(callConverter);
         const userDocRef = doc(db, 'user', userId).withConverter(callConverter);
-        await 
-            updateDoc(docRef, { isMatched: matchedValue });
-            updateDoc(userDocRef, { matchedFeed: matchedValue ? feedId : '' });
+        await updateDoc(docRef, { isMatched: matchedValue });
+        await updateDoc(userDocRef, { matchedFeed: matchedValue ? feedId : '' });
     }
     catch (e: any) {
         alert('업데이트를 하지 못했습니다. 다시 시도해주세요. \n상세: ' + e);
