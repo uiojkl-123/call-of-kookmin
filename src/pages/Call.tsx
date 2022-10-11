@@ -38,6 +38,7 @@ export const Call = () => {
 
   const handleCall = async () => {
     if (!currentUser?.userId) return;
+    if (!title || !content || !location || !price || !date) return;
     const call = {
       title: title,
       content: content,
@@ -51,6 +52,8 @@ export const Call = () => {
     await uploadCall(call)
     alert('부름 완료')
   }
+
+
 
   return (
     <>
@@ -80,13 +83,14 @@ export const Call = () => {
           </IonItem>
         </div>
 
-        <div className='button' >
+        <div className='buttonsContainer'>
+          {currentUser?.matchedFeed && <COKButton text={'부름이 진행 중이에요.'} onClick={() => history.push('feedPage/' + currentUser.matchedFeed)} />}
           <COKButton disabled={!(title && location && price && content)} text={'부르기'} onClick={handleCall} />
         </div>
       </IonContent>
 
       <IonModal mode='ios' keepContentsMounted={true}>
-        <IonDatetime mode='ios' id="datetime" minuteValues={[0,5,10,15,20,25,30,35,40,45,50,55]} onIonChange={(e: any) => { setDate(parseISO(e.detail.value)) }} isDateEnabled={isWeekday}></IonDatetime>
+        <IonDatetime mode='ios' id="datetime" minuteValues={[0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]} onIonChange={(e: any) => { setDate(parseISO(e.detail.value)) }} isDateEnabled={isWeekday}></IonDatetime>
       </IonModal>
     </>
   )
