@@ -11,8 +11,6 @@ import { useStore } from '../store/store'
 import './Feed.scss'
 import { useFeedStore } from '../store/feedStore'
 import { acceptFeed } from '../serviece/accept.service'
-import { Timestamp } from 'firebase/firestore'
-import { Accepting } from './Accepting'
 import { Count } from './Count'
 
 interface FeedPageProps {

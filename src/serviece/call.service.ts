@@ -1,10 +1,12 @@
 import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, setDoc } from "firebase/firestore";
 import { CallClass } from "../model/Call";
 import { useFeedStore } from "../store/feedStore";
-import { callCollectionRef, db, userPaymentCollectionRefById } from "./firebase";
+import { callCollectionRef, db, functions, userPaymentCollectionRefById } from "./firebase";
 import { loadTossPayments } from '@tosspayments/payment-sdk'
 import axios from "axios";
 import { callConverter } from "./firebaseConverters";
+import { httpsCallable } from 'firebase/functions';
+
 
 export const uploadCall = async (call: any) => {
     try {
@@ -39,20 +41,12 @@ export const comfirmPayment = async (confirmParam: { paymentKey: string, amount:
     if (!paymentDocData) {
         throw new Error('결제 금액이 다릅니다.');
     }
-    const options = {
-        method: 'POST',
-        url: 'https://api.tosspayments.com/v1/payments/confirm',
-        headers: {
-            Authorization: `Basic dGVzdF9za19PQVE5MnlteE4zNGU2eFFXMEd2VmFqUktYdmRrOg==`,
-            'Content-Type': 'application/json'
-        },
-        data: confirmParam
-    };
+
     try {
-        const response = await axios.request(options);
+        const callCheck = httpsCallable(functions, 'checkPayValid')
+        await callCheck(confirmParam);
         await setDoc(doc(callCollectionRef, confirmParam.orderId), paymentDocData);
         return
-
     } catch (e: any) {
         console.error(e);
         console.error(e.response.data.message);
