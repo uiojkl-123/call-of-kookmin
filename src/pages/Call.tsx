@@ -7,9 +7,8 @@ import { uploadCall } from '../serviece/call.service'
 import './Call.scss'
 import { format, parseISO } from 'date-fns'
 import { useStore } from '../store/store'
-import { Timestamp } from 'firebase/firestore'
-import { isMatch } from 'date-fns/esm'
-import { CallClass } from '../model/Call'
+import { auth } from '../serviece/firebase'
+import { v4 as uuidv4 } from 'uuid';
 
 export const Call = () => {
 
@@ -37,20 +36,21 @@ export const Call = () => {
   }
 
   const handleCall = async () => {
-    if (!currentUser?.userId) return;
+    if (!currentUser?.userId || !auth.currentUser?.email) return;
     if (!title || !content || !location || !price || !date) return;
     const call = {
       title: title,
       content: content,
+      orderId: uuidv4(),
       location: location,
+      customerEmail: auth.currentUser.email,
       price: price,
       date: date,
       createdAt: new Date(),
-      writer: currentUser?.userId,
+      writer: currentUser.userId,
       isMatched: false
     }
     await uploadCall(call)
-    alert('부름 완료')
   }
 
 
@@ -71,7 +71,7 @@ export const Call = () => {
           </IonItem>
           <IonItem>
             <IonLabel position='stacked'>가격 *</IonLabel>
-            <IonInput type='number' value={price} onIonChange={(e: any) => setPrice(e.target.value)} ></IonInput>
+            <IonInput type='number' value={price} min={1000} onIonChange={(e: any) => setPrice(e.target.value)} ></IonInput>
           </IonItem>
           <IonItem>
             <IonLabel position='stacked'>완료 기한</IonLabel>
@@ -85,7 +85,7 @@ export const Call = () => {
 
         <div className='buttonsContainer'>
           {currentUser?.matchedFeed && <COKButton text={'부름이 진행 중이에요.'} onClick={() => history.push('feedPage/' + currentUser.matchedFeed)} />}
-          <COKButton disabled={!(title && location && price && content)} text={'부르기'} onClick={handleCall} />
+          <COKButton disabled={!(title && location && price && content && price <= 1000)} text={'부르기'} onClick={handleCall} />
         </div>
       </IonContent>
 

@@ -42,6 +42,7 @@ import { useStore } from './store/store';
 import { Temp } from './pages/Temp';
 import { Accepting } from './components/Accepting';
 import Main from './pages/Main';
+import { Payment } from './pages/Payment';
 
 
 setupIonicReact();
@@ -100,6 +101,8 @@ const App: React.FC = () => {
                 <Redirect to={"/main"} />
               </Route>
               <Route exact path='/main' component={Main} />
+
+              <Route exact path='/payment/:paymentResult' component={Payment} />
 
               <Route exact path="/accept" component={Accept} />
 

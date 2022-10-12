@@ -10,7 +10,7 @@ export class CallClass {
     isMatched : boolean
     matchedFeed?: string
 
-    constructor(id: string, title: string, content: string, price: number, date: Date, location: string, createdAt: Date, writer: string, isMatched:boolean) {
+    constructor(id: string, title: string, content: string, price: number, date: Date, location: string, createdAt: Date, writer: string, isMatched:boolean, matchedFeed?: string) {
         this.id = id
         this.title = title
         this.content = content
@@ -20,5 +20,6 @@ export class CallClass {
         this.createdAt = createdAt
         this.writer = writer
         this.isMatched = isMatched
+        this.matchedFeed = matchedFeed
     }
 }
